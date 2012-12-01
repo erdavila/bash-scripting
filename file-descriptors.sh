@@ -1,17 +1,19 @@
 #!/bin/bash
+# Shows samples of reading and writing to file via file descriptors and redirections
+
 set -e
 
 FILENAME=file.txt
 
-NOCOLOR=$'\033[0m'
-BLACK=$'\033[30;1m'
-RED=$'\033[31;1m'
-GREEN=$'\033[32;1m'
-BLUE=$'\033[34;1m'
-YELLOW=$'\033[33;1m'
-MAGENTA=$'\033[35;1m'
-CYAN=$'\033[36;1m'
-WHITE=$'\033[37;1m'
+NOCOLOR=$'\e[0m'
+BLACK=$'\e[30;1m'
+RED=$'\e[31;1m'
+GREEN=$'\e[32;1m'
+BLUE=$'\e[34;1m'
+YELLOW=$'\e[33;1m'
+MAGENTA=$'\e[35;1m'
+CYAN=$'\e[36;1m'
+WHITE=$'\e[37;1m'
 
 
 ECHO_FILE_DESCRIPTORS_CMD='ls -l --color /proc/self/fd'
