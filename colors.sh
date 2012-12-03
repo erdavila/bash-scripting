@@ -33,14 +33,14 @@ BG_COLORS=$(
 
 opnames=(''
 	'bold         '
-	'darker       '
-	'?            '
-	'underline    '
-	'?            '
-	'?            '
+	'faint        '
+	'italic       '
+	'underlined   '
+	'blink slow   '
+	'blink rapid  '
 	'reverse      '
-	'black        '
-	'strikethrough'
+	'concealed    '
+	'crossed-out  '
 )
 
 
