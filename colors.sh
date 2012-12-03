@@ -116,7 +116,7 @@ for n in 1 2 ; do
 done
 
 while true ; do
-	clear
+	echo $'\e[2J\e[;H'
 		
 	for n in 1 2 ; do
 		selected=$(get-value-of selected$n)
