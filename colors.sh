@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+shopt -s nocasematch
 
 
 function make-code-string() {
@@ -171,7 +172,7 @@ while true ; do
 	echo
 	
 	case $COMMAND in
-		F|f)
+		F)
 			for n in 1 2 ; do
 				if $(get-value-of selected$n) ; then
 					fg=$(get-value-of fg$n)
@@ -180,7 +181,7 @@ while true ; do
 				fi
 			done 
 			;;
-		G|g)
+		G)
 			for n in 1 2 ; do
 				if $(get-value-of selected$n) ; then
 					fg=$(get-value-of fg$n)
@@ -189,7 +190,7 @@ while true ; do
 				fi
 			done 
 			;;
-		V|v)
+		V)
 			for n in 1 2 ; do
 				if $(get-value-of selected$n) ; then
 					bg=$(get-value-of bg$n)
@@ -198,7 +199,7 @@ while true ; do
 				fi
 			done 
 			;;
-		B|b)
+		B)
 			for n in 1 2 ; do
 				if $(get-value-of selected$n) ; then
 					bg=$(get-value-of bg$n)
@@ -217,25 +218,25 @@ while true ; do
 				fi
 			done
 			;;
-		Q|q)
+		Q)
 			selected1=true
 			selected2=false
 			;;
-		A|a)
+		A)
 			selected1=true
 			selected2=true
 			;;
-		Z|z)
+		Z)
 			selected1=false
 			selected2=true
 			;;
-		W|w)
+		W)
 			copy-values 1 2
 			;;
-		X|x)
+		X)
 			copy-values 2 1
 			;;
-		S|s)
+		S)
 			copy-values 2 tmp
 			copy-values 1 2
 			copy-values tmp 1
