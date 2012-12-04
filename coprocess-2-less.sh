@@ -24,9 +24,11 @@ function set_paged_output() {
 		less
 	}
 	
-	# At this point, LESS is an array with two subscripts:
-	#   LESS[0] is an  input fd connected via a pipe to the coprocess stdout
-	#   LESS[1] is an output fd connected via a pipe to the coprocess stdin 
+	# At this point:
+	#    LESS_PID is a variable which contains the coprocess PID
+	#    LESS is an array with two subscripts:
+	#       LESS[0] is an  input fd connected via a pipe to the coprocess stdout
+	#       LESS[1] is an output fd connected via a pipe to the coprocess stdin
 	IN_FROM_LESS_OUT=${LESS[0]}
 	OUT_TO_LESS_IN=${LESS[1]}
 
@@ -45,7 +47,7 @@ function unset_paged_output() {
 	exec 1>&$STDOUT-
 
 	# Wait for coprocess termination
-	wait
+	wait $LESS_PID
 }
 
 

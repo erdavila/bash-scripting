@@ -23,7 +23,7 @@ function func() {
 }
 
 
-echo "The function returned \"$(func)\""
+echo "The function returns \"$(func)\""
 
 
 # Close the duplication ($STDOUT) of the original stdout fd
