@@ -21,7 +21,7 @@ ECHO_FILE_DESCRIPTORS_CMD='ls -l --color /proc/self/fd'
 function echo_description() {
 	local DESCRIPTION="$1"
 	echo
-	echo $BLUE'#' $DESCRIPTION$NOCOLOR
+	echo $MAGENTA'#' $DESCRIPTION$NOCOLOR
 }
 
 function echo_and_execute_command() {

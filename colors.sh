@@ -45,9 +45,9 @@ opnames=(''
 
 
 function get-value-of() {
-	local VALUE
-	eval 'VALUE=$'$1
-	echo $VALUE
+	local varname=$1
+	echo ${!varname}
+	return
 }
 
 function set-value-of() {
