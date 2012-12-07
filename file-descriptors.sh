@@ -1,42 +1,14 @@
 #!/bin/bash
 # Shows samples of reading and writing to file via file descriptors and redirections
-
 set -e
+. display-and-execute.inc.sh
 
 FILENAME=file.txt
-
-NOCOLOR=$'\e[0m'
-BLACK=$'\e[30;1m'
-RED=$'\e[31;1m'
-GREEN=$'\e[32;1m'
-BLUE=$'\e[34;1m'
-YELLOW=$'\e[33;1m'
-MAGENTA=$'\e[35;1m'
-CYAN=$'\e[36;1m'
-WHITE=$'\e[37;1m'
-
-
 ECHO_FILE_DESCRIPTORS_CMD='ls -l --color /proc/self/fd'
 
-function echo_description() {
-	local DESCRIPTION="$1"
-	echo
-	echo $MAGENTA'#' $DESCRIPTION$NOCOLOR
-}
-
-function echo_and_execute_command() {
-	local COMMAND="$1"
-	echo $GREEN'$'$YELLOW $COMMAND$NOCOLOR
-	eval $COMMAND
-}
 
 function echo_file_descriptors() {
-	echo_and_execute_command "$ECHO_FILE_DESCRIPTORS_CMD"
-}
-
-function execute() {
-	echo_description "$1"
-	echo_and_execute_command "$2"
+	echo-and-execute-command "$ECHO_FILE_DESCRIPTORS_CMD"
 }
 
 function execute_fd() {
@@ -45,7 +17,7 @@ function execute_fd() {
 	local VARNAME=$3
 	execute "$DESCRIPTION" "$COMMAND"
 	if [ "$VARNAME" != "" ] ; then
-		echo_and_execute_command "echo \$$VARNAME"
+		echo-and-execute-command "echo \$$VARNAME"
 	fi
 	echo_file_descriptors
 }
