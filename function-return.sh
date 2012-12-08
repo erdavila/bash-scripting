@@ -22,8 +22,14 @@ function func() {
 	#exec {RETURN}>&-  # Not really needed!
 }
 
+function func-simple() {
+	echo 'This should go to standard output [simple]'
+	echo 'This should go to error output [simple]' >&2
+	echo 'This should be returned by the function [simple]' >&$RETURN
+} {RETURN}>&1- 1>&$STDOUT
 
 echo "The function returns \"$(func)\""
+echo "The function returns \"$(func-simple)\""
 
 
 # Close the duplication ($STDOUT) of the original stdout fd
