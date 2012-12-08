@@ -3,8 +3,8 @@ set -e
 . display-and-execute.inc.sh
 
 
-# For some reason, the declare command has no effect 
-# when eval-ed, so we need to execute it the other way...
+# For some reason, the declare command has no effect when
+# eval-ed, so we need to execute it the other way...
 declare -A ARRAY
 execute 'Define an array'\
 	'declare -A ARRAY'\
@@ -22,7 +22,7 @@ execute 'All members'\
 	'(echo ${ARRAY[*]} ; export IFS=/ ; echo "${ARRAY[*]}")'\
 	'(echo ${ARRAY[@]} ; export IFS=/ ; echo "${ARRAY[@]}")'\
 
-execute 'Iterate'\
+execute 'Iterate on values'\
 	'for VAL in ${ARRAY[*]} ; do echo -n [$VAL] ; done ; echo'\
 	'for VAL in ${ARRAY[@]} ; do echo -n [$VAL] ; done ; echo'\
 	'for VAL in "before ${ARRAY[*]} after" ; do echo -n [$VAL] ; done ; echo'\
@@ -34,13 +34,19 @@ execute 'Lengths'\
 execute 'Number of elements'\
 	'echo ${#ARRAY[*]} or ${#ARRAY[@]}'\
 
-execute 'Keys'\
+execute 'List keys'\
 	'for VAL in ${!ARRAY[*]} ; do echo -n [$VAL] ; done ; echo'\
 	'for VAL in ${!ARRAY[@]} ; do echo -n [$VAL] ; done ; echo'\
 	'for VAL in "before ${!ARRAY[*]} after" ; do echo -n [$VAL] ; done ; echo'\
 	'for VAL in "before ${!ARRAY[@]} after" ; do echo -n [$VAL] ; done ; echo'\
 
-execute 'List keys and values'\
+execute 'Keys and values as indexed arrays'\
+	'KEYS=("${!ARRAY[@]}")'\
+	'for KEY in "${KEYS[@]}" ; do echo -n [$KEY] ; done ; echo'\
+	'VALUES=("${ARRAY[@]}")'\
+	'for VALUE in "${VALUES[@]}" ; do echo -n [$VALUE] ; done ; echo'\
+
+execute 'List keys and its values'\
 	'for K in ${!ARRAY[@]} ; do echo [$K]=\"${ARRAY[$K]}\" ; done'\
 
 execute 'Destroy an element'\
