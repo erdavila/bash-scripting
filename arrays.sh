@@ -57,3 +57,9 @@ execute 'Destroy an element'\
 	'unset ARRAY[3]'\
 	'echo [${ARRAY[3]}]'\
 
+# For some reason, append-assignment (+=) fails when
+# eval-ed, so we need to execute it the other way...
+echo-description 'Append items'
+ARRAY+=("after old last" "new last")
+echo-command 'ARRAY+=("after old last" "new last")'
+echo-and-execute-command 'for I in ${!ARRAY[@]} ; do echo [$I]=\"${ARRAY[$I]}\" ; done'

@@ -17,8 +17,13 @@ function echo-description() {
 
 function echo-and-execute-command() {
 	local COMMAND="$1"
-	echo "$GREEN"'$'"$YELLOW $COMMAND$NOCOLOR"
+	echo-command "$COMMAND"
 	eval "$COMMAND"
+}
+
+function echo-command() {
+	local COMMAND="$1"
+	echo "$GREEN"'$'"$YELLOW $COMMAND$NOCOLOR"
 }
 
 function execute() {
