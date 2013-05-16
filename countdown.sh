@@ -1,17 +1,34 @@
-function countdown() {
-	local COUNT=$1
-	if [ "$COUNT" == "" ] ; then
-		echo "Expected parameter in seconds!" >&2
-		return 1
-	fi
-	while [ $COUNT -gt 0 ] ; do
-		echo -ne "$COUNT \r"
+function _curr-timeval() {
+	date +'%s'
+}
+
+function _countdown() {
+	local TIMEVAL=$1
+	echo 'Now:              '$(date)
+	echo 'Counting down to: '$(date --date="@$TIMEVAL")
+	
+	while true ; do
+		local CURR_TIMEVAL=$(_curr-timeval)
+		local DELAY=$((TIMEVAL - CURR_TIMEVAL))
+		if ! [ $DELAY -gt 0 ] ; then
+			break
+		fi
+		echo -ne "$DELAY \r"
 		sleep 1
-		COUNT=$((COUNT - 1))
 	done
 	echo ' '
 }
 
+function countdown() {
+	local DELAY=$1
+	if [ "$DELAY" == "" ] ; then
+		echo "Expected parameter in seconds!" >&2
+		return 1
+	fi
+	local CURR_TIMEVAL=$(_curr-timeval)
+	local TIMEVAL=$((CURR_TIMEVAL + DELAY))
+	_countdown $TIMEVAL
+}
 
 function countdown_to() {
 	local TIME=$1
@@ -19,17 +36,9 @@ function countdown_to() {
 		echo "Expected timestamp parameter!" >&2
 		return 1
 	fi
-	echo 'Now:              '$(date)
-	echo 'Counting down to: '$(date --date="$TIME")
-	TIME=$(date --date="$TIME" +'%s')
-	
-	local CURR_TIME=$(date +'%s')
-	COUNT=$((TIME - CURR_TIME))
-	while [ $COUNT -gt 0 ] ; do
-		echo -ne "$COUNT \r"
-		sleep 1
-		CURR_TIME=$(date +'%s')
-		COUNT=$((TIME - CURR_TIME))
-	done
-	echo ' '
+	local TIMEVAL=$(date --date="$TIME" +'%s')
+	if [ "$TIMEVAL" == "" ] ; then
+		return 1
+	fi
+	_countdown $TIMEVAL
 }
